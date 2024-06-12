@@ -28,7 +28,6 @@ const App = () => {
   const [targetHandles, setTargetHandles] = useState([]) // keep track of target handles when new edges are created between nodes
 
   // determine when a node is selected by user
-  // console.log(nodes, reactFlowInstance);
   const update = useCallback((event, node) => {
     // console.log(event, node);
     setChangeNode(node)
@@ -41,8 +40,6 @@ const App = () => {
   // onConnect is called when only making a sourceHandle connection
   const onConnect = useCallback(
     (params) => {
-      // console.log(params)
-
       // check if sourcehandle is already connected to node via a edge if it exists then allow another connection
       if (sourceHandles.includes(params.source)) return
       sourceHandles = sourceHandles.concat(params.source)
@@ -56,7 +53,6 @@ const App = () => {
       if (targetHandle.includes(params.target)) return
       targetHandle = targetHandle.concat(params.target)
       setTargetHandles(targetHandle)
-      // console.log('target', targetHandle)
     },
     [setEdges]
   )
@@ -90,8 +86,6 @@ const App = () => {
         position,
         data: { heading: 'Send Message', label: `text message ${id}` },
       }
-
-      // console.log(id, newNode)
       id++
       setNodes((nds) => nds.concat(newerNode))
     },
@@ -111,10 +105,8 @@ const App = () => {
 
   // save node flow on click of save changes button using below function & validating for not more than one node target handles are unconnected
   const saveFlow = () => {
-    // console.log(reactFlowInstance);
     const totalNodes = reactFlowInstance.getNodes().length
-    // console.log(targetHandles)
-
+    
     if (targetHandles.length !== totalNodes - 1) {
       setErrorMessage('Cannot save Flow')
       setMessageColor('redMessage')

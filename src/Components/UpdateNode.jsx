@@ -9,14 +9,9 @@ const UpdateNode = ({
   setNewNodeLabel,
 }) => {
   const [nodeName, setNodeName] = useState(selectedNode.data['label']);
-  // const reactFlowInstance = useReactFlow();
-  // console.log(reactFlowInstance.getNodes());
   let id = selectedNode.id;
 
   useEffect(() => {
-    // console.log(selectedNode.data['label'], setNodes);
-    // const nodes = reactFlowInstance.getNodes();
-
     setNodeName(selectedNode.data['label']);
   }, [id]);
 
@@ -25,8 +20,6 @@ const UpdateNode = ({
     setNodes((nds) =>
       nds.map((node) => {
         if (node.id === selectedNode.id) {
-          // it's important that you create a new object here
-          // in order to notify react flow about the change
           node.data = {
             ...node.data,
             label: nodeName,
